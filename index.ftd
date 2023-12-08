@@ -4,6 +4,8 @@
 -- import: fastn/processors as pr
 -- import: saurabh-lohiya.github.io/portfolio/blog-articles/sample-post
 
+-- integer $current-slide: 1
+
 
 -- page:
 
@@ -46,14 +48,14 @@ tag: A LEAD UX & UI DESIGNER BASED IN CANADA
 languages: $common.languages
 achievements: $common.achievements
 
--- services: MY SERVICES
+-- latest-work: LATEST WORK
 categories-1: $common.categories-1
 categories-2: $common.categories-2
 categories-3: $common.categories-3
 category-title-1: Web Development
 category-title-2: Business
 category-title-3: Mobile App
-id: services
+id: latest-work
 
 A LEAD UX & UI DESIGNER BASED IN CANADA
 
@@ -68,9 +70,9 @@ left: true
 
 Cum sint enim id rerum fugit vel enim eius qui provident similique
 
--- latest-works: LATEST WORKS
+-- services: MY SERVICES
 projects: $common.projects
-id: latest-works
+id: services
 
 A LEAD UX & UI DESIGNER BASED IN CANADA
 
@@ -606,14 +608,14 @@ color: $inherited.colors.text
 
 
 
--- component latest-works:
+-- component services:
 optional caption title:
 optional body body:
 $common.project list projects:
 string id:
 
 -- ftd.column:
-id: $latest-works.id
+id: $services.id
 width: fill-container
 align-content: center
 padding-vertical.px: 100
@@ -624,8 +626,8 @@ background.solid: $inherited.colors.background.base
 width: fill-container
 max-width.fixed.px: $common.max-width
 
--- ftd.text: $latest-works.title
-if: { latest-works.title != NULL }
+-- ftd.text: $services.title
+if: { services.title != NULL }
 role: $inherited.types.heading-large
 color: $inherited.colors.text
 style: bold
@@ -640,13 +642,13 @@ margin-top.px if { ftd.device == "mobile" }: 15
 -- end: ftd.column
 
 -- ftd.text:
-if: { latest-works.body != NULL }
+if: { services.body != NULL }
 role: $inherited.types.heading-tiny
 color: $inherited.colors.text
 margin-top.px: 20
 margin-top.px if { ftd.device == "mobile" }: 25
 
-$latest-works.body
+$services.body
 
 -- ftd.row:
 width: fill-container
@@ -655,9 +657,11 @@ margin-top.px: 30
 spacing.fixed.px: 30
 
 -- portfolio-box: $obj.title
-$loop$: $latest-works.projects as $obj
+$loop$: $services.projects as $obj
 sub-title: $obj.sub-title
 src: $obj.src
+link: $obj.link
+index: $obj.index
 
 -- end: ftd.row
 
@@ -665,7 +669,7 @@ src: $obj.src
 
 -- end: ftd.column
 
--- end: latest-works
+-- end: services
 
 
 
@@ -680,7 +684,9 @@ src: $obj.src
 caption title:
 string sub-title:
 ftd.image-src src:
+string link:
 boolean $hover: false
+integer index: 1
 
 -- ftd.column:
 width.fixed.px: 348
@@ -688,6 +694,7 @@ height.fixed.px: 342
 $on-mouse-enter$: $ftd.set-bool($a = $portfolio-box.hover, v = true)
 $on-mouse-leave$: $ftd.set-bool($a = $portfolio-box.hover, v = false)
 border-radius.px: 5
+link: $portfolio-box.link
 
 -- ftd.image:
 border-radius.px: 5
@@ -704,6 +711,7 @@ top.px: 0
 left.px: 0
 width: fill-container
 height: fill-container
+z-index: 4
 
 -- end: ftd.column
 
@@ -717,12 +725,12 @@ align-content: center
 
 -- ftd.text: $portfolio-box.title
 role: $inherited.types.heading-small
-color: $inherited.colors.text
+color: $inherited.colors.text-strong
 style: bold
 
 -- ftd.text: $portfolio-box.sub-title
 role: $inherited.types.heading-tiny
-color: $inherited.colors.text
+color: $inherited.colors.text-strong
 style: bold
 
 -- end: ftd.column
@@ -740,7 +748,17 @@ style: bold
 
 
 
--- component services:
+
+
+
+
+
+
+
+
+
+
+-- component latest-work:
 optional caption title:
 optional body body:
 string category-title-1:
@@ -749,10 +767,10 @@ string category-title-3:
 $common.category list categories-1:
 $common.category list categories-2:
 $common.category list categories-3:
-string id: services
+string id:
 
 -- ftd.column:
-id: $services.id
+id: $latest-work.id
 width: fill-container
 background.solid: $inherited.colors.background.step-2
 align-content: center
@@ -764,8 +782,8 @@ width: fill-container
 max-width.fixed.px: $common.max-width
 align-content if { ftd.device == "mobile" }: center
 
--- ftd.text: $services.title
-if: { services.title != NULL }
+-- ftd.text: $latest-work.title
+if: { latest-work.title != NULL }
 role: $inherited.types.heading-large
 color: $inherited.colors.text
 style: bold
@@ -780,21 +798,21 @@ margin-top.px if { ftd.device == "mobile" }: 20
 -- end: ftd.column
 
 -- ftd.text:
-if: { services.body != NULL }
+if: { latest-work.body != NULL }
 role: $inherited.types.heading-tiny
 color: $inherited.colors.text
 margin-top.px: 20
 margin-top.px if { ftd.device == "mobile" }: 30
 text-align if { ftd.device == "mobile" }: center
 
-$services.body
+$latest-work.body
 
 -- ftd.column:
 width: fill-container
 spacing.fixed.px: 32
 padding-vertical.px: 32
 
--- ftd.text: $services.category-title-1
+-- ftd.text: $latest-work.category-title-1
 role: $inherited.types.heading-small
 color: $inherited.colors.text-strong
 
@@ -804,14 +822,15 @@ wrap: true
 spacing.fixed.px: 30
 
 -- service-1: $obj.title
-$loop$: $services.categories-1 as $obj
+$loop$: $latest-work.categories-1 as $obj
+link: $obj.link
 icon: $obj.icon
 
 $obj.body
 
 -- end: ftd.row
 
--- ftd.text: $services.category-title-2
+-- ftd.text: $latest-work.category-title-2
 role: $inherited.types.heading-small
 color: $inherited.colors.text-strong
 
@@ -821,14 +840,15 @@ wrap: true
 spacing.fixed.px: 30
 
 -- service-2: $obj.title
-$loop$: $services.categories-2 as $obj
+$loop$: $latest-work.categories-2 as $obj
+link: $obj.link
 icon: $obj.icon
 
 $obj.body
 
 -- end: ftd.row
 
--- ftd.text: $services.category-title-3
+-- ftd.text: $latest-work.category-title-3
 role: $inherited.types.heading-small
 color: $inherited.colors.text-strong
 
@@ -838,8 +858,9 @@ wrap: true
 spacing.fixed.px: 30
 
 -- service-3: $obj.title
-$loop$: $services.categories-3 as $obj
+$loop$: $latest-work.categories-3 as $obj
 icon: $obj.icon
+link: $obj.link
 
 $obj.body
 
@@ -851,7 +872,7 @@ $obj.body
 
 -- end: ftd.column
 
--- end: services
+-- end: latest-work
 
 
 
@@ -865,6 +886,7 @@ $obj.body
 -- component service-1:
 caption title:
 body body:
+string link:
 ftd.image-src icon:
 boolean $hover: false
 
@@ -877,6 +899,7 @@ padding-horizontal.px: 30
 background.solid: $inherited.colors.background.step-2
 border-width.px: 1
 border-radius.px: 5
+link: $service-1.link
 
 -- ftd.image:
 src: $service-1.icon
@@ -919,6 +942,7 @@ $service-1.body
 -- component service-2:
 caption title:
 body body:
+string link:
 ftd.image-src icon:
 boolean $hover: false
 
@@ -931,6 +955,7 @@ padding-horizontal.px: 30
 background.solid: $inherited.colors.background.step-2
 border-width.px: 1
 border-radius.px: 5
+link: $service-2.link
 
 -- ftd.image:
 src: $service-2.icon
@@ -974,6 +999,7 @@ $service-2.body
 -- component service-3:
 caption title:
 body body:
+string link:
 ftd.image-src icon:
 boolean $hover: false
 
@@ -986,6 +1012,7 @@ padding-horizontal.px: 30
 background.solid: $inherited.colors.background.step-2
 border-width.px: 1
 border-radius.px: 5
+link: $service-3.link
 
 -- ftd.image:
 src: $service-3.icon

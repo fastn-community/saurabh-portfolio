@@ -1,0 +1,69 @@
+-- $site-doc.copyright-info: Copyright © 2023
+
+-- site-doc.doc-home: latest-work
+github-url: https://github.com/saurabh-lohiya/portfolio
+current-package: saurabh-lohiya.github.io/portfolio
+site-title: latest-work
+
+-- site-doc.header: Demo:
+
+-- site-doc.output:
+
+-- latest-work: LATEST WORK
+categories-1: $common.categories-1
+categories-2: $common.categories-2
+categories-3: $common.categories-3
+category-title-1: Web Development
+category-title-2: Business
+category-title-3: Mobile App
+id: latest-work
+
+A LEAD UX & UI DESIGNER BASED IN CANADA
+
+-- end: site-doc.output
+
+-- site-doc.header: Overview:
+
+`-- ds.latest-work` this section is used for adding list of latest-work
+that the proprietor offers.
+
+-- site-doc.header: Invocation:
+
+-- cb.code:
+lang: ftd
+max-height.fixed.px: 350
+
+\-- latest-work: LATEST WORK
+categories-1: $common.categories-1
+categories-2: $common.categories-2
+categories-3: $common.categories-3
+category-title-1: Web Development
+category-title-2: Business
+category-title-3: Mobile App
+id: latest-work
+
+A LEAD UX & UI DESIGNER BASED IN CANADA
+
+-- site-doc.header: Properties:
+
+Below are details of all properties of `-- ds.latest-work` component.
+
+-- site-doc.component-property: `title`
+type: Caption (`required`)
+
+This is a default property of the `latest-work` component. It's used to add a
+title to `latest-work` component.
+
+-- site-doc.component-property: `body`
+type: body (`required`)
+
+This is a default property of the `latest-work` component. It's used to add a
+body to `latest-work` component.
+
+-- site-doc.component-property: `overhauls`
+type: list (`required`)
+
+This is a default property of the `latest-work` component. It's used to add a
+list of latest-work that the proprietor wants to add in `latest-work` section.
+
+-- end: site-doc.doc-home

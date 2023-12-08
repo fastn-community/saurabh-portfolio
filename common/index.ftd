@@ -46,6 +46,7 @@ spread.px: 2
 -- record category:
 caption title:
 body body:
+string link:
 ftd.image-src icon:
 
 
@@ -61,7 +62,9 @@ ftd.image-src logo:
 -- record project:
 caption title:
 string sub-title:
+string link:
 ftd.image-src src:
+integer index: 1
 
 
 
@@ -270,12 +273,14 @@ tag: Available
 -- category list categories-1:
 
 -- category: Unique Design
+link: /
 icon: $assets.files.assets.monitor.png
 
 I design and develop services for customers of all sizes, specializing 
 in creating stylish, modern websites.
 
 -- category: Unique Design
+link: /
 icon: $assets.files.assets.tags.png
 
 I design and develop services for customers of all sizes, specializing 
@@ -291,24 +296,28 @@ in creating stylish, modern websites.
 -- category list categories-2:
 
 -- category: Unique Design
+link: /
 icon: $assets.files.assets.messages.svg
 
 I design and develop services for customers of all sizes, specializing 
 in creating stylish, modern websites.
 
 -- category: Unique Design
+link: /
 icon: $assets.files.assets.tablet.png
 
 I design and develop services for customers of all sizes, specializing 
 in creating stylish, modern websites.
 
 -- category: Unique Design
+link: /
 icon: $assets.files.assets.bullseye.png
 
 I design and develop services for customers of all sizes, specializing 
 in creating stylish, modern websites.
 
 -- category: Unique Design
+link: /
 icon: $assets.files.assets.settings.svg
 
 I design and develop services for customers of all sizes, specializing 
@@ -325,12 +334,14 @@ in creating stylish, modern websites.
 -- category list categories-3:
 
 -- category: Unique Design
+link: /
 icon: $assets.files.assets.monitor.png
 
 I design and develop services for customers of all sizes, specializing 
 in creating stylish, modern websites.
 
 -- category: Unique Design
+link: /
 icon: $assets.files.assets.tags.png
 
 I design and develop services for customers of all sizes, specializing 
@@ -374,26 +385,38 @@ logo: $assets.files.assets.settings.svg
 -- project: Our Photography
 sub-title: Design
 src: $assets.files.assets.leaves.jpeg
+link: /
+index: 1
 
--- project: Our Photography
+-- project: Our Photography 2
 sub-title: Design
 src: $assets.files.assets.coffee.jpeg
+link: /
+index: 2
 
--- project: Our Photography
+-- project: Our Photography 3
 sub-title: Design
 src: $assets.files.assets.bananas.jpeg
+link: /
+index: 3
 
--- project: Our Photography
+-- project: Our Photography 4
 sub-title: Design
 src: $assets.files.assets.bb.jpeg
+link: /
+index: 4
 
--- project: Our Photography
+-- project: Our Photography 5
 sub-title: Design
 src: $assets.files.assets.pineapple.jpeg
+link: /
+index: 5
 
--- project: Our Photography
+-- project: Our Photography 6
 sub-title: Design
 src: $assets.files.assets.wooden-hand.jpeg
+link: /
+index: 6
 
 -- end: projects
 

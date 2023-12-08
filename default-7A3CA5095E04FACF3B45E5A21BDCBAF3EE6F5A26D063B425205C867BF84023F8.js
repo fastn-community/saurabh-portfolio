@@ -447,6 +447,21 @@ Prism.languages.ftd = {
         getAllFields() {
             return this.#fields;
         }
+        getClonedFields() {
+            let clonedFields = {};
+            for (let key in this.#fields) {
+                let field_value = this.#fields[key];
+                if (field_value instanceof fastn.recordInstanceClass
+                    || field_value instanceof fastn.mutableClass
+                    || field_value instanceof fastn.mutableListClass) {
+                    clonedFields[key] = this.#fields[key].getClone();
+                }
+                else {
+                    clonedFields[key] = this.#fields[key];
+                }
+            }
+            return clonedFields;
+        }
         addClosure(closure) {
             this.#closures.push(closure);
         }
@@ -517,6 +532,8 @@ Prism.languages.ftd = {
             this.#name = name;
             this.#global = global;
         }
+
+        getName() { return this.#name; }
     
         get(function_name) {
             return this.#global[`${this.#name}__${function_name}`];
@@ -536,7 +553,8 @@ Prism.languages.ftd = {
     fastn.recordInstanceClass = RecordInstance;
     fastn.module = function (name, global) {
         return new Module(name, global);
-    }    
+    }
+    fastn.moduleClass = Module;
 
     return fastn;
 })({});
@@ -2354,7 +2372,7 @@ class Node2 {
                     this.attachCss("justify-content", staticValue[1]);
                     break;
                 case fastn_dom.Spacing.Fixed()[0]:
-                    this.attachCss("gap", staticValue[1]);
+                    this.attachCss("gap", fastn_utils.getStaticValue(staticValue[1]));
                     break;
             }
 
@@ -3047,17 +3065,17 @@ let fastn_utils = {
     },
     getInheritedValues(default_args, inherited, function_args) {
         let record_fields = {
-            "colors": ftd.default_colors.getClone().setAndReturn("is-root", true),
-            "types": ftd.default_types.getClone().setAndReturn("is-root", true)
+            "colors": ftd.default_colors.getClone().setAndReturn("is_root", true),
+            "types": ftd.default_types.getClone().setAndReturn("is_root", true)
         }
         Object.assign(record_fields, default_args);
         let fields = {};
         if (inherited instanceof fastn.recordInstanceClass) {
-            fields = inherited.getAllFields();
-            if (fields["colors"].get("is-root")) {
+            fields = inherited.getClonedFields();
+            if (fastn_utils.getStaticValue(fields["colors"].get("is_root"))) {
                delete fields.colors;
             }
-            if (fields["types"].get("is-root")) {
+            if (fastn_utils.getStaticValue(fields["types"].get("is_root"))) {
                delete fields.types;
             }
         }
@@ -4110,6 +4128,7 @@ const ftd = (function() {
     exports.http = function (url, method, fastn_module, ...body) {
         if (url instanceof fastn.mutableClass) url = url.get();
         if (method instanceof fastn.mutableClass) method = method.get();
+        if (fastn_module instanceof fastn.moduleClass) fastn_module = fastn_module.getName();
         method = method.trim().toUpperCase();
         let request_json = {};
         const init = {
@@ -4164,9 +4183,9 @@ const ftd = (function() {
                             if (Array.isArray(value)) {
                                 // django returns a list of strings
                                 value = value.join(" ");
-                                // also django does not append `-error`
-                                key = key + "-error";
                             }
+                            // also django does not append `-error`
+                            key = key + "-error";
                             key = fastn_module + "#" + key;
                             data[key] = value;
                         }
@@ -4191,13 +4210,11 @@ const ftd = (function() {
 
     exports.navigate = function(url, request_data) {
         let query_parameters = new URLSearchParams();
-        if(request_data instanceof RecordInstance) {
+        if(request_data instanceof fastn.recordInstanceClass) {
             // @ts-ignore
             for (let [header, value] of Object.entries(request_data.toObject())) {
-                if (header !== "url" && header !== "function" && header !== "method") {
-                    let [key, val] = value.length === 2 ? value : [header, value];
-                    query_parameters.set(key, val);
-                }
+                let [key, val] = value.length === 2 ? value : [header, value];
+                query_parameters.set(key, val);
             }
         }
         let query_string = query_parameters.toString();
@@ -4633,6 +4650,40 @@ ftd.increment_by = function (args) {
     let __args__ = fastn_utils.getArgs({
     }, args);
     let fastn_utils_val___args___a = fastn_utils.clone(fastn_utils.getter(__args__.a) + fastn_utils.getter(__args__.v));
+    if (fastn_utils_val___args___a instanceof fastn.mutableClass) {
+      fastn_utils_val___args___a = fastn_utils_val___args___a.get();
+    }
+    if (!fastn_utils.setter(__args__.a, fastn_utils_val___args___a)) {
+      __args__.a = fastn_utils_val___args___a;
+    }
+  } finally {
+    __fastn_package_name__ = __fastn_super_package_name__;
+  }
+}
+ftd.decrement = function (args) {
+  let __fastn_super_package_name__ = __fastn_package_name__;
+  __fastn_package_name__ = "saurabh_lohiya_github_io_portfolio";
+  try {
+    let __args__ = fastn_utils.getArgs({
+    }, args);
+    let fastn_utils_val___args___a = fastn_utils.clone(fastn_utils.getter(__args__.a) - 1);
+    if (fastn_utils_val___args___a instanceof fastn.mutableClass) {
+      fastn_utils_val___args___a = fastn_utils_val___args___a.get();
+    }
+    if (!fastn_utils.setter(__args__.a, fastn_utils_val___args___a)) {
+      __args__.a = fastn_utils_val___args___a;
+    }
+  } finally {
+    __fastn_package_name__ = __fastn_super_package_name__;
+  }
+}
+ftd.decrement_by = function (args) {
+  let __fastn_super_package_name__ = __fastn_package_name__;
+  __fastn_package_name__ = "saurabh_lohiya_github_io_portfolio";
+  try {
+    let __args__ = fastn_utils.getArgs({
+    }, args);
+    let fastn_utils_val___args___a = fastn_utils.clone(fastn_utils.getter(__args__.a) - fastn_utils.getter(__args__.v));
     if (fastn_utils_val___args___a instanceof fastn.mutableClass) {
       fastn_utils_val___args___a = fastn_utils_val___args___a.get();
     }

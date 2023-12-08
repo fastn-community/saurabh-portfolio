@@ -9,9 +9,13 @@ site-title: services
 
 -- site-doc.output:
 
--- ds.services: MY services
-projects: $common.projects
-id: work
+-- ds.services: MY SERVICES
+categories-1: $common.categories-1
+categories-2: $common.categories-2
+categories-3: $common.categories-3
+category-title-1: Web Development
+category-title-2: Business
+category-title-3: Mobile App
 
 A LEAD UX & UI DESIGNER BASED IN CANADA
 
@@ -19,8 +23,8 @@ A LEAD UX & UI DESIGNER BASED IN CANADA
 
 -- site-doc.header: Overview:
 
-`-- ds.services` this section is used for adding list of projects
-that the proprietor has worked upon.
+`-- ds.services` this section is used for adding list of services
+that the proprietor offers.
 
 -- site-doc.header: Invocation:
 
@@ -28,9 +32,13 @@ that the proprietor has worked upon.
 lang: ftd
 max-height.fixed.px: 350
 
-\-- ds.services: MY services
-projects: $common.projects
-id: work
+\-- ds.services: MY SERVICES
+categories-1: $common.categories-1
+categories-2: $common.categories-2
+categories-3: $common.categories-3
+category-title-1: Web Development
+category-title-2: Business
+category-title-3: Mobile App
 
 A LEAD UX & UI DESIGNER BASED IN CANADA
 
@@ -50,7 +58,7 @@ type: body (`required`)
 This is a default property of the `services` component. It's used to add a
 body to `services` component.
 
--- site-doc.component-property: `projects`
+-- site-doc.component-property: `overhauls`
 type: list (`required`)
 
 This is a default property of the `services` component. It's used to add a
